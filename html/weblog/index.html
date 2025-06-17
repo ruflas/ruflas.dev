@@ -1,121 +1,109 @@
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>ruflas weblog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
-    <link
-      rel="alternate"
-      type="application/atom+xml"
-      title="ruflas Atom Feed"
-      href="https://ruflas.dev/weblog/atom.xml"
-    />
-    <meta
-      name="description"
-      content="Explora el weblog de ruflas y mantente actualizado/a sobre sus experiencias, proyectos y reflexiones en el campo de la ingeniería informática y ciberseguridad."
-    />
-    <script>
-      function initTheme() {
-        var themeSwitcher = document.getElementById("checkbox");
-        var currentTheme = localStorage.getItem("theme");
 
-        if (!currentTheme) {
-          currentTheme = "whitestyles.css";
-          localStorage.setItem("theme", currentTheme);
-        }
+<head>
+  <meta charset="UTF-8" />
+  <title>ruflas weblog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="ruflas Atom Feed"
+    href="https://ruflas.dev/weblog/atom.xml" />
+  <meta name="description"
+    content="Explora el weblog de ruflas y mantente actualizado/a sobre sus experiencias, proyectos y reflexiones en el campo de la ingeniería informática y ciberseguridad." />
+  <script>
+    function initTheme() {
+      var themeSwitcher = document.getElementById("checkbox");
+      var currentTheme = localStorage.getItem("theme");
 
-        document
-          .getElementById("theme-style")
-          .setAttribute("href", currentTheme);
-
-        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      if (!currentTheme) {
+        currentTheme = "whitestyles.css";
+        localStorage.setItem("theme", currentTheme);
       }
 
-      function toggleTheme() {
-        var themeSwitcher = document.getElementById("checkbox");
-        var theme = themeSwitcher.checked
-          ? "whitestyles.css"
-          : "darkstyles.css";
-        document.getElementById("theme-style").setAttribute("href", theme);
-        localStorage.setItem("theme", theme);
-      }
+      document
+        .getElementById("theme-style")
+        .setAttribute("href", currentTheme);
 
-      window.onload = function () {
-        initTheme();
-        var themeSwitcher = document.getElementById("checkbox");
-        themeSwitcher.addEventListener("change", toggleTheme);
-      }
-    </script>
-    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
-    <link
-      id="theme-style"
-      rel="stylesheet"
-      type="text/css"
-      href="whitestyles.css"
-    />
-    <script src="weblogTranslate.js" defer></script>
-  </head>
+      themeSwitcher.checked = currentTheme === "darkstyles.css";
+    }
 
-  <body>
-    <header>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="https://ruflas.dev">Inicio</a></li>
-          <li><a href="#">Weblog</a></li>
-          <li><a href="https://ruflas.dev/now">Now</a></li>
-          <li>
-            <a href="https://ruflas.dev/weblog/atom.xml"
-              ><img src="../img/rss.svg" alt="RSS Feed" class="rss-icon"
-            /></a>
-          </li>
-        </ul>
-        <div class="theme-switch-wrapper">
-          <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round" onclick="toggleTheme()"></div>
-          </label>
-        </div>
-      </nav>
-    </header>
-    <main>
-      <h1>Publicaciones</h1>
-      <ol id="postlist">
-        <li class="postlist">
-          <img src="../img/hacktheboxicon.png" /><span>14 Marz 2024</span>
-          <a href="/weblog/cyberapocalypsectf">Cyber Apocalypse 2024 CTF</a>
+    function toggleTheme() {
+      var themeSwitcher = document.getElementById("checkbox");
+      var theme = themeSwitcher.checked
+        ? "whitestyles.css"
+        : "darkstyles.css";
+      document.getElementById("theme-style").setAttribute("href", theme);
+      localStorage.setItem("theme", theme);
+    }
+
+    window.onload = function () {
+      initTheme();
+      var themeSwitcher = document.getElementById("checkbox");
+      themeSwitcher.addEventListener("change", toggleTheme);
+    }
+  </script>
+  <script defer src="https://stats.ruflas.dev/script.js"
+    data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+  <link id="theme-style" rel="stylesheet" type="text/css" href="whitestyles.css" />
+  <script src="weblogTranslate.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="https://ruflas.dev">Inicio</a></li>
+        <li><a href="#">Weblog</a></li>
+        <li><a href="https://ruflas.dev/now">Now</a></li>
+        <li>
+          <a href="https://ruflas.dev/weblog/atom.xml">
+            <img src="../img/rss.svg" alt="RSS Feed" class="rss-icon" style="width:32px;height:32px;">
+          </a>
         </li>
-        <li class="postlist">
-          <img src="../img/hacktheboxicon.png" /><span>02 Marz 2024</span>
-          <a href="/weblog/perfection">Perfection Writeup</a>
-        </li>
-        <li class="postlist">
-          <img src="../img/hacktheboxicon.png" /><span>14 Nov 2023</span>
-          <a href="/weblog/shocker">Shocker Writeup</a>
-        </li>
-        <li class="postlist">
-          <img src="../img/hacktheboxicon.png" /><span>11 Nov 2023</span>
-          <a href="/weblog/babyre">Baby RE Writeup</a>
-        </li>
-        <li class="postlist">
-          <img src="../img/batch.png" /><span>27 Jun 2023</span>
-          <a href="/weblog/progreso">Progreso en la web</a>
-        </li>
-        <li class="postlist">
-          <img src="../img/batch.png" /><span>17 Jun 2023</span>
-          <a href="/weblog/holamundo">hola mundo</a>
-        </li>
-      </ol>
-    </main>
-    <footer>
-      <p id="footerText">
-        © 2022-2025 ruflas | licensed under
-        <a
-          href="https://creativecommons.org/licenses/by-sa/4.0/"
-          target="_blank"
-          >CC BY-SA</a
-        >
-        😽
-      </p>
-    </footer>
-  </body>
+      </ul>
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round" onclick="toggleTheme()"></div>
+        </label>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <h1>Publicaciones</h1>
+    <ol id="postlist">
+      <li class="postlist">
+        <img src="../img/hacktheboxicon.png" /><span>14 Marz 2024</span>
+        <a href="/weblog/cyberapocalypsectf">Cyber Apocalypse 2024 CTF</a>
+      </li>
+      <li class="postlist">
+        <img src="../img/hacktheboxicon.png" /><span>02 Marz 2024</span>
+        <a href="/weblog/perfection">Perfection Writeup</a>
+      </li>
+      <li class="postlist">
+        <img src="../img/hacktheboxicon.png" /><span>14 Nov 2023</span>
+        <a href="/weblog/shocker">Shocker Writeup</a>
+      </li>
+      <li class="postlist">
+        <img src="../img/hacktheboxicon.png" /><span>11 Nov 2023</span>
+        <a href="/weblog/babyre">Baby RE Writeup</a>
+      </li>
+      <li class="postlist">
+        <img src="../img/batch.png" /><span>27 Jun 2023</span>
+        <a href="/weblog/progreso">Progreso en la web</a>
+      </li>
+      <li class="postlist">
+        <img src="../img/batch.png" /><span>17 Jun 2023</span>
+        <a href="/weblog/holamundo">hola mundo</a>
+      </li>
+    </ol>
+  </main>
+  <footer>
+    <p id="footerText">
+      © 2022-2025 ruflas | licensed under
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA</a>
+      😽
+    </p>
+  </footer>
+</body>
+
 </html>
