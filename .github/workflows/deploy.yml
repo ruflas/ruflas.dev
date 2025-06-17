@@ -23,4 +23,4 @@ jobs:
 
     - name: Deploy files with rsync
       run: |
-        rsync -avz --delete ./ deploy@${{ secrets.VPS_IP }}:/var/www/html/
+        rsync -avz --delete ./html/ deploy@${{ secrets.VPS_IP }}:/var/www/html/
