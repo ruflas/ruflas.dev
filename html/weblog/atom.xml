@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>ruflas</title>
+  <link href="https://ruflas.dev/weblog"/>
+  <updated>2024-03-14T00:00:00Z</updated>
+  <author>
+    <name>ruflas</name>
+    <email>ruflas@ruflas.dev</email>
+    <uri>https://ruflas.dev</uri>
+    <icon>https://ruflas.dev/img/catIcon.webp</icon>
+  </author>
+  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <entry>
+    <title>Cyber Apocalypse 2024: Hacker Royale</title>
+    <link href="https://ruflas.dev/weblog/cyberapocalypsectf"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6f</id>
+    <updated>2024-03-14T00:00:00Z</updated>
+    <summary>Experiencia y reflexiones sobre el CTF Cyber Apocalypse 2024 de HackTheBox.</summary>
+  </entry>
+  <entry>
+    <title>Perfection Writeup</title>
+    <link href="https://ruflas.dev/weblog/perfection"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6e</id>
+    <updated>2024-03-02T00:00:00Z</updated>
+    <summary>Writeup de la máquina Perfection en HackTheBox.</summary>
+  </entry>
+  <entry>
+    <title>Shocker Writeup</title>
+    <link href="https://ruflas.dev/weblog/shocker"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6d</id>
+    <updated>2023-11-14T00:00:00Z</updated>
+    <summary>Writeup de la maquina Shocker de HackTheBox</summary>
+  </entry>
+
+  <entry>
+    <title>Baby RE Writeup</title>
+    <link href="https://ruflas.dev/weblog/babyre"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c</id>
+    <updated>2023-11-11T00:00:00Z</updated>
+    <summary>Resumen del challenge de ingeniería inversa 'Baby RE'</summary>
+  </entry>
+
+  <entry>
+    <title>Progreso en la web</title>
+    <link href="https://ruflas.dev/weblog/progreso"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+    <updated>2023-06-27T00:00:00Z</updated>
+    <summary>Post sobre el progreso en la web</summary>
+  </entry>
+
+  <entry>
+    <title>hola mundo</title>
+    <link href="https://ruflas.dev/weblog/holamundo"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b</id>
+    <updated>2023-06-17T00:00:00Z</updated>
+    <summary>Post de hola mundo</summary>
+  </entry>
+
+</feed>

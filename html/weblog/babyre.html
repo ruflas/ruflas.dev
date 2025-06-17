@@ -1,0 +1,163 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BabyRE</title>
+    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" title="ruflas Atom Feed" href="https://ruflas.dev/weblog/atom.xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Primer post del blog de ruflas.">
+        <script>
+            function initTheme() {
+              var themeSwitcher = document.getElementById("checkbox");
+              var currentTheme = localStorage.getItem("theme");
+      
+              if (!currentTheme) {
+                currentTheme = "whitestyles.css";
+                localStorage.setItem("theme", currentTheme);
+              }
+      
+              document
+                .getElementById("theme-style")
+                .setAttribute("href", currentTheme);
+      
+              themeSwitcher.checked = currentTheme === "darkstyles.css";
+            }
+      
+            function toggleTheme() {
+              var themeSwitcher = document.getElementById("checkbox");
+              var theme = themeSwitcher.checked
+                ? "whitestyles.css"
+                : "darkstyles.css";
+              document.getElementById("theme-style").setAttribute("href", theme);
+              localStorage.setItem("theme", theme);
+            }
+      
+            window.onload = function () {
+              initTheme();
+              var themeSwitcher = document.getElementById("checkbox");
+              themeSwitcher.addEventListener("change", toggleTheme);
+            }
+        </script>
+        <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+        <link id="theme-style" rel="stylesheet" type="text/css" href="whitestyles.css">
+</head>
+
+<body data-post-id="3">
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="https://ruflas.dev">Inicio</a></li>
+                <li><a href="https://ruflas.dev/weblog/">Weblog</a></li>
+                <li><a href="https://ruflas.dev/now">Now</a></li>
+                <li><a href="https://ruflas.dev/weblog/atom.xml"><img src="../img/rss.svg" alt="RSS Feed" class="rss-icon"></a></li>
+            </ul>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox"/>
+                    <div class="slider round" onclick="toggleTheme()"></div>
+                </label>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="post">
+            <h1>Baby RE Writeup</h1>
+            <h2 class="date">Publicado el 11 de noviembre de 2023</h2>
+            <h3 class="info">Challenge creado por <a href="https://app.hackthebox.com/users/21439">Xh4H</a></h3>
+            <p>Este challenge es una introducción a la ingeniería inversa. El objetivo es encontrar la contraseña del
+                archivo comprimido 'Baby RE.zip'.</p>
+            <p>Primero descomprimimos el archivo zip, en mi caso he utilizado la version GUI del sistema ya que no me dejaba el comando unzip.</p>
+            <p>En caso de no contar con GUI es posible utilizar otra herramienta como 7z probablemente.</p>
+            <p>La contraseña del archivo zip es 'hackthebox'</p>
+            <div class="postimg">
+                <a href="../img/bre1.webp">
+                    <img src="../img/bre1.webp" alt="1">
+                </a>
+            </div>
+            <p>Una vez descomprimimos el archivo podemos observar que contiene un archivo 'baby' que es un ejecutable</p>
+            <code>┌─[ruflas@parrot]─[~/Downloads]<br>└──╼ $file baby
+            <br>baby: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=25adc53b89f781335a27bf1b81f5c4cb74581022, for GNU/Linux 3.2.0, not stripped</code>
+            <p>Concedemos permisos de ejecución con el comando:</p>
+            <code>chmod +x baby</code>
+            <p>Al ejecutarlo nos pide una contraseña, si introducimos una incorrecta nos muestra un mensaje de error.</p>
+            <p>Probamos a ver los strings del ejecutable:</p>
+            <code>┌─[ruflas@parrot]─[~/Downloads]<br>└──╼ $strings baby</code>
+            <p>Podemos observar que hay una cadena que nos dice lo siguiente:</p>
+            <code>Dont run `strings` on this challenge, that is not the way!!!!
+                <br>Insert key: 
+                <br><div class="spoiler">abcde122313</div>
+                <br>Try again later.</code>
+            <p>Ya hemos obtenido la contraseña pero dado que esta no es la forma correcta de resolver el reto probaremos a ver el codigo en assembly del ejecutable.</p>
+            <p>Para ello utilizaremos la herramienta Ghidra:</p>
+            <div class="postimg">
+                <a href="../img/bre2.webp">
+                    <img src="../img/bre2.webp" alt="2">
+                </a>
+            </div>
+            <p>En la imagen podemos observar el código en assembly (y cuando miremos mas a fondo en C).</p>
+            <p>En la parte de la izquierda podemos observar que hay una función llamada 'main' que es la que se ejecuta al ejecutar el programa.</p>
+            <div class="postimg">
+                <a href="../img/bre3.webp">
+                    <img src="../img/bre3.webp" alt="3">
+                </a>
+            </div>
+            <p>En la parte de la derecha, despues de hacer click en main, podemos observar el código en C de la función 'main'.</p>
+            <code>undefined8 main(void)
+            <br> {
+            <br>  int iVar1;
+            <br> undefined8 local_48;
+            <br>    undefined8 local_40;
+            <br>    undefined4 local_38;
+            <br>     undefined2 local_34;
+            <br>     char local_28 [24];
+            <br>     char *local_10;   
+            <br>     local_10 = "Dont run `strings` on this challenge, that is not the way!!!!";
+            <br>     puts("Insert key: ");
+            <br>     fgets(local_28,0x14,stdin);
+            <br>     iVar1 = strcmp(local_28,"abcde122313\n");
+            <br>    if (iVar1 == 0) {
+            <br>      local_48 = 0x594234427b425448;
+            <br>      local_40 = 0x3448545f5633525f;
+            <br>      local_38 = 0x455f5354;
+            <br>      local_34 = 0x7d5a;
+            <br>      puts((char *)&local_48);
+            <br>    }
+            <br>    else {
+            <br>      puts("Try again later.");
+            <br>    }
+            <br>    return 0;
+            <br>}</code>
+            <p>Facilmente veremos el mensaje de error bajo un else que nos lleva hasta un if donde podemos ver como se comparan dos cadenas de texto.</p>
+            <p>Observamos como si la cadena es: <div class="spoiler">abcde122313</div></p>
+            <p>El programa en principio se ejecutara correctamente.</p>
+            <p>Probamos que la contraseña sea correcta:</p>
+            <code>┌─[ruflas@parrot]─[~/Downloads]<br>└──╼ $./baby
+                <br>Insert key: 
+                <br><div class="spoiler">abcde122313</div>
+                <br><div class="spoiler">HTB{BTH4T_3V3RY_7IM3}</div></code>
+            <p>Y ya tenemos la contraseña del archivo comprimido.</p>
+        </div>
+    </main>
+    <section id="commentsSection">
+        <h2>Comentarios</h2>
+
+        <form id="commentForm" onsubmit="postComment(event)">
+            <input type="text" id="nameInput" placeholder="Nombre" required>
+            <input type="text" id="websiteInput" placeholder="Sitio web">
+            <textarea id="commentInput" placeholder="Comentario" required></textarea>
+            <button type="submit">Publicar</button>
+        </form>
+
+        <div id="commentsContainer"></div>
+    </section>
+    <footer>
+        <p id="footerText">© 2022-2025 ruflas | licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+                target="_blank">CC
+                BY-SA</a> 😽</p>
+    </footer>
+<script src="code.js"></script>
+</body>
+
+</html>

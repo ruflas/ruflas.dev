@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ruflas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is the now page of ruflas, here you can find what I am focused on at this point in my life."
+    />
+    <link rel="icon" href="./img/catIcon.webp" type="image/x-icon" />
+    <script src="code.js"></script>
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "whitestyles.css"
+          : "darkstyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+  </head>
+  <body onload="loadLanguage()">
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a id="navInicio" href="https://ruflas.dev">Inicio</a></li>
+          <li><a href="/weblog">Weblog</a></li>
+          <li><a href="#">Now</a></li>
+        </ul>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round" onclick="toggleTheme()"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="content">
+        <h1 id="contentTitle">¿Qué estoy haciendo?</h1>
+        <p id="contentIntro">Actualmente esta es la lista de cosas que estoy haciendo:</p>
+        <p id="contentStudy">
+          Estudiando el grado de Ingeniería Informática en Tecnologías de la
+          Información en la
+          <a href="https://epigijon.uniovi.es/" target="_blank">EPI</a>, escuela
+          de la
+          <a href="https://uniovi.es" target="_blank">Universidad de Oviedo</a>
+        </p>
+	<p id="contentStudy2">
+          Actualmente estudiando como parte de una movilidad Erasmus+ en el
+          Institute of Applied Informatics, escuela
+          de la
+          <a href="https://study.ans-elblag.pl" target="_blank">University of Applied Sciences in Elbląg</a>
+        </p>
+        <p id="selfLearning">Formandome por mi cuenta en diversos campos como son:</p>
+        <ul>
+          <p id="listItem1">Pentesting y Hacking Etico</p>
+          <p id="listItem2">Desarrollo de aplicaciones Web</p>
+          <p id="listItem3">Sistemas y Redes</p>
+        </ul>
+        <div class="linea"></div>
+        <p id="previousActivities">Cosas que he estado haciendo anteriormente:</p>
+        <ul>
+          <p id="activity1"> 
+            Jun-Ago 2023: Trabajando como "Analista de Ciberseguridad" en practicas en
+            <a href="https://seresco.es" target="_blank">seresco</a>
+          </p>
+          <p id="activity2">
+            Jul-Ago 2022: Trabajando como "Desarrollador Backend" en practicas en
+            <a href="https://ebroker.es" target="_blank">ebroker</a>
+          </p>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p id="footerText">
+        © 2022-2025 ruflas | licensed under
+        <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/"
+          target="_blank"
+          >CC BY-SA</a
+        >
+        😽
+      </p>
+    </footer>
+  </body>
+</html>

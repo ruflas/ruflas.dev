@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'vga8';
+  src: url('https://sakamoto.pl/css/PxPlus_IBM_VGA8.ttf')  format('truetype');
+}
+body {
+    background-color: #111;
+}
+* {
+	font-family: "vga8";
+	color: #ddd;
+	font-weight: 500;
+	line-height: 1.1;
+	text-align: center;
+}
+h1 {
+	margin: 15px;
+	font-size: 256px;
+	text-shadow: 8px 8px #777;
+}
+h2 {
+	margin: 0;
+	font-size: 32px;
+}
+.laura {
+	color: #d60270 !important;
+}
+.laura:hover {
+	color: #f63090 !important;
+}
+.kamila {
+	color: #ee72f1 !important;
+}
+.kamila:hover {
+	color: #fe82fa !important;
+}
+a,a:visited, a:focus, a:active {
+	color: #33aa30;
+}
+a:hover {
+	text-shadow: 1px 1px #666666;
+	color: #33aa30;
+}

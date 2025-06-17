@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ruflas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bienvenido/a al sitio web personal de ruflas. Descubre más sobre mí, mis proyectos y cómo contactarme."
+    />
+    <link rel="icon" href="./img/catIcon.webp" type="image/x-icon" />
+    <script src="code.js"></script>
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "whitestyles.css"
+          : "darkstyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+  </head>
+  <body onload="loadLanguage()">
+    <header>
+      <nav>
+        <div class="nav-container">
+          <ul class="nav-links">
+            <li><a id="navInicio" href="#">Inicio</a></li>
+            <li><a href="/weblog">Weblog</a></li>
+            <li><a href="/now">Now</a></li>
+          </ul>
+          <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+              <input type="checkbox" id="checkbox" />
+              <div class="slider round" onclick="toggleTheme()"></div>
+            </label>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section id="about">
+        <img id="ruflasGif" src="./img/ruflaspp.gif" alt="Two lovely cats" />
+        <h2 id="aboutTitle">Acerca de mi</h2>
+        <p id="aboutText">
+          Soy ruflas, actualmente soy un estudiante de 3º año en Ingeniería
+          Informática y estoy interesado en campos como la ciberseguridad, el
+          desarrollo y la administración de sistemas y redes.
+        </p>
+      </section>
+      <section id="projects">
+        <h2 id="projectsTitle">Proyectos</h2>
+        <p id="project1">
+          Aplicación web en desarrollo:
+          <a href="https://resize.zip" target="_blank">resize.zip</a>
+        </p>
+        <p id="project2">
+          BOT de Telegram:
+          <a
+            href="https://github.com/ruflas/Virtual-Assistant-Telegram-Bot"
+            target="_blank"
+            >repositorio de github</a
+          >
+        </p>
+        <p id="project3">
+          Homelab: Construyendo un laboratrio para desplegar mis propios
+          proyectos.
+        </p>
+      </section>
+      <section id="contact">
+        <h2 id="contactTitle">Contacto / Enlaces de interes</h2>
+        <p>
+          Mail: <a href="mailto:ruflas@ruflas.dev">ruflas@ruflas.dev</a> | PGP
+          Key: <a href="ruflas.asc" download="ruflas.asc">click aquí</a>
+        </p>
+        <p>HTB Profile:<a href="https://app.hackthebox.com/profile/403595" target="_blank"> ruflas</a></p>
+        <p>
+          Github:
+          <a href="https://github.com/ruflas" target="_blank">@ruflas</a>
+        </p>
+      </section>
+      <section id="analytics">
+        <p id="analyticsText">
+           Este sitio web recolecta información básica de forma anónima, es
+          decir, sin emplear cookies. El sitio emplea una instancia autónoma de
+          <a href="https://umami.is/" target="_blank">Umami</a>, una herramienta
+          de análisis web, para efectuar dicha recolección de datos. Los
+          resultados de estos análisis están disponibles para su visualización
+          pública
+          <a href="https://stats.ruflas.dev/share/nEqun93OOaAxYeQZ/ruflas.dev" target="_blank">aquí</a>.
+        </p>
+    </section>
+    </main>
+    <footer>
+      <p id="footerText">
+        © 2022-2025 ruflas | licensed under
+        <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/"
+          target="_blank"
+          >CC BY-SA</a
+        >
+        😽
+      </p>
+      <div class="kb-club">
+        <a target="blank" href="https://512kb.club"><span class="kb-club-no-bg">512KB Club</span><span class="kb-club-bg">Blue Team</span></a>
+      </div>
+    </footer>
+  </body>
+</html>

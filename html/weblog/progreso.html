@@ -1,0 +1,123 @@
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Progreso</title>
+    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="ruflas Atom Feed"
+      href="https://ruflas.dev/weblog/atom.xml"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Avances en el blog." />
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "whitestyles.css"
+          : "darkstyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+  </head>
+
+  <body data-post-id="2">
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="https://ruflas.dev">Inicio</a></li>
+          <li><a href="https://ruflas.dev/weblog/">Weblog</a></li>
+          <li><a href="https://ruflas.dev/now">Now</a></li>
+          <li>
+            <a href="https://ruflas.dev/weblog/atom.xml"
+              ><img src="../img/rss.svg" alt="RSS Feed" class="rss-icon"
+            /></a>
+          </li>
+        </ul>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round" onclick="toggleTheme()"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="post">
+        <h2>Actualizaciones Blog</h2>
+        <p class="date">Publicado el 27 de junio de 2023</p>
+        <p>
+          Ya esta configurada la sección de comentarios al igual que
+          <a href="https://umami.is/" target="_blank">Umami</a>.
+        </p>
+        <p>
+          Poco a poco la web va tomando forma con el poco tiempo que tengo para
+          dedicarla entre los examenes y el trabajo.
+        </p>
+        <p>
+          Aun asi estoy aprendiendo mucho con este proceso, tanto de redes,
+          sistemas y backend en Nodejs.
+        </p>
+      </div>
+    </main>
+    <section id="commentsSection">
+      <h2>Comentarios</h2>
+
+      <form id="commentForm" onsubmit="postComment(event)">
+        <input type="text" id="nameInput" placeholder="Nombre" required />
+        <input type="text" id="websiteInput" placeholder="Sitio web" />
+        <textarea
+          id="commentInput"
+          placeholder="Comentario"
+          required
+        ></textarea>
+        <button type="submit">Publicar</button>
+      </form>
+
+      <div id="commentsContainer"></div>
+    </section>
+    <footer>
+      <p id="footerText">
+        © 2022-2025 ruflas | licensed under
+        <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/"
+          target="_blank"
+          >CC BY-SA</a
+        >
+        😽
+      </p>
+    </footer>
+    <script src="code.js"></script>
+  </body>
+</html>

