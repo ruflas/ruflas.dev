@@ -1,0 +1,10 @@
+User-agent: *
+
+Disallow: /ruflas.asc
+
+Disallow: /documents/
+Disallow: /*.pdf$
+
+Allow: /
+
+Sitemap: https://ruflas.dev/sitemap.xml
