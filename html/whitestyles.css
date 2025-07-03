@@ -257,7 +257,7 @@ footer p#footerText {
     margin: 0 6px;
     display: inline-block;
   }
-  
+
   .kb-club {
     margin-top: 10px;
   }
@@ -285,3 +285,9 @@ footer p#footerText {
 	background: #64B5F6;
 	color: #212121;
 }
+
+ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  

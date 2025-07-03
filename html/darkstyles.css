@@ -300,3 +300,9 @@ footer p#footerText {
 	background: #64B5F6;
 	color: #212121;
 }
+
+ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
