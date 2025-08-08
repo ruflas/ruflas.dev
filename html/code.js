@@ -2,7 +2,7 @@ var translations = {
     "es": {
         "navInicio": "Inicio",
         "aboutTitle": "Acerca de mí",
-        "aboutText": "Soy ruflas, actualmente soy un estudiante de 3º año en Ingeniería Informática y estoy interesado en campos como la ciberseguridad, el desarrollo y la administración de sistemas y redes.",
+        "aboutText": "Soy ruflas, actualmente soy un estudiante de 4º año en Ingeniería Informática y estoy interesado en campos como la ciberseguridad, el desarrollo y la administración de sistemas y redes.",
         "projectsTitle": "Proyectos",
         "project1": 'Aplicación web en desarrollo: <a href="https://resize.zip" target="_blank">resize.zip</a>',
         "project2": 'BOT de Telegram: <a href="https://github.com/ruflas/Virtual-Assistant-Telegram-Bot" target="_blank">repositorio de github</a>',
@@ -25,7 +25,7 @@ var translations = {
     "en": {
         "navInicio": "Home",
         "aboutTitle": "About me",
-        "aboutText": "I am ruflas, I am currently a 3rd year student in Computer Engineering and I am interested in fields such as cybersecurity, development, and administration of systems and networks.",
+        "aboutText": "I am ruflas, I am currently a 4rd year student in Computer Engineering and I am interested in fields such as cybersecurity, development, and administration of systems and networks.",
         "projectsTitle": "Projects",
         "project1": 'Web application in development: <a href="https://resize.zip" target="_blank">resize.zip</a>',
         "project2": 'Telegram BOT: <a href="https://github.com/ruflas/Virtual-Assistant-Telegram-Bot" target="_blank">github repository</a>',
