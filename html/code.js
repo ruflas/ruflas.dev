@@ -13,14 +13,15 @@ var translations = {
         "contentIntro": "Actualmente esta es la lista de cosas que estoy haciendo:",
         "contentStudy": "Estudiando el grado de Ingeniería Informática en Tecnologías de la Información en la <a href='https://epigijon.uniovi.es/' target='_blank'>EPI</a>, escuela de la <a href='https://uniovi.es' target='_blank'>Universidad de Oviedo</a>.",
         "contentStudy2": "2024–2025: Cursé un año académico de mi grado en Ingeniería Informática como estudiante Erasmus+ en la <a href='https://study.ans-elblag.pl' target='_blank'>University of Applied Sciences in Elbląg</a> (Polonia).",
-	"selfLearning": "Formándome por mi cuenta en diversos campos como son:",
+	    "contentWork": "Trabajando como \"Becario de Servicios Informáticos\" en la <a href='https://epigijon.uniovi.es/' target='_blank'>EPI</a>, escuela de la <a href='https://www.uniovi.es' target='_blank'>Universidad de Oviedo</a>",
+        "selfLearning": "Formándome por mi cuenta en diversos campos como son:",
         "listItem1": "Pentesting y Hacking Ético",
         "listItem2": "Desarrollo de aplicaciones Web",
         "listItem3": "Sistemas y Redes",
         "previousActivities": "Cosas que he estado haciendo anteriormente:",
         "activity1": "Jun-Ago 2023: Trabajando como \"Analista de Ciberseguridad\" en prácticas en <a href='https://seresco.es' target='_blank'>seresco</a>",
         "activity2": "Jul-Ago 2022: Trabajando como \"Desarrollador Backend\" en prácticas en <a href='https://ebroker.es' target='_blank'>ebroker</a>",
-        "activity3": "Nov 2025 - Jun 2026: Trabajando como \"Becario en Servicios Informáticos\" en <a href='https://uniovi.es' target='_blank'>Universidad de Oviedo</a>"
+        "activity3": "Nov 2025 - Jun 2026: Trabajando como \"Becario en Servicios Informáticos\" en <a href='https://www.uniovi.es' target='_blank'>Universidad de Oviedo</a>"
     },
     "en": {
         "navInicio": "Home",
@@ -36,14 +37,15 @@ var translations = {
         "contentIntro": "Currently, this is the list of things I'm doing:",
         "contentStudy": "Studying a degree in Computer Engineering in Information Technologies at the <a href='https://epigijon.uniovi.es/' target='_blank'>EPI</a>, a school of the <a href='https://uniovi.es' target='_blank'>University of Oviedo</a>.",
         "contentStudy2": "2024–2025: Completed one academic year of my Computer Engineering degree as an Erasmus+ student at the <a href='https://study.ans-elblag.pl' target='_blank'>University of Applied Sciences in Elbląg</a> (Poland).",
-	"selfLearning": "Self-training in various fields such as:",
+	    "contentWork": "Working as an \"IT Services Intern\" at the <a href='https://epigijon.uniovi.es/' target='_blank'>EPI</a>, a school of the <a href='https://www.uniovi.es' target='_blank'>University of Oviedo</a>",
+        "selfLearning": "Self-training in various fields such as:",
         "listItem1": "Pentesting and Ethical Hacking",
         "listItem2": "Web application development",
         "listItem3": "Systems and Networks",
         "previousActivities": "Things I have been doing previously:",
         "activity1": "Jun-Aug 2023: Working as a \"Cybersecurity Analyst\" intern at <a href='https://seresco.es' target='_blank'>seresco</a>",
         "activity2": "Jul-Aug 2022: Working as a \"Backend Developer\" intern at <a href='https://ebroker.es' target='_blank'>ebroker</a>",
-        "activity3": "Nov 2025 - Jun 2026: Working as an \"IT Services Intern\" at <a href='https://uniovi.es' target='_blank'>University of Oviedo</a>"
+        "activity3": "Nov 2025 - Jun 2026: Working as an \"IT Services Intern\" at <a href='https://www.uniovi.es' target='_blank'>University of Oviedo</a>"
     }
 };
 
