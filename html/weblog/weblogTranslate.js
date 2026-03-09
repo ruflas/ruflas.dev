@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Baby RE Writeup": "Baby RE Writeup",
                 "Progreso en la web": "Website Progress",
                 "hola mundo": "Hello World",
-                "© 2022-2025 ruflas | licensed under": "© 2022-2025 ruflas | licensed under",
+                "© 2022-2026 ruflas | licensed under": "© 2022-2026 ruflas | licensed under",
                 "14 Marz 2024": "March 14, 2024",
                 "02 Marz 2024": "March 2, 2024",
                 "14 Nov 2023": "November 14, 2023",
