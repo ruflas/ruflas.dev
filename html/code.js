@@ -21,7 +21,8 @@ var translations = {
         "previousActivities": "Cosas que he estado haciendo anteriormente:",
         "activity1": "Jun-Ago 2023: Trabajando como \"Analista de Ciberseguridad\" en prácticas en <a href='https://seresco.es' target='_blank'>seresco</a>",
         "activity2": "Jul-Ago 2022: Trabajando como \"Desarrollador Backend\" en prácticas en <a href='https://ebroker.es' target='_blank'>ebroker</a>",
-        "activity3": "Nov 2025 - Jun 2026: Trabajando como \"Becario en Servicios Informáticos\" en <a href='https://www.uniovi.es' target='_blank'>Universidad de Oviedo</a>"
+        "activity3": "Nov 2025 - Jun 2026: Trabajando como \"Becario en Servicios Informáticos\" en <a href='https://www.uniovi.es' target='_blank'>Universidad de Oviedo</a>",
+        "lastUpdated": "<em>Actualizado: 26 de abril de 2026</em>"
     },
     "en": {
         "navInicio": "Home",
@@ -45,7 +46,8 @@ var translations = {
         "previousActivities": "Things I have been doing previously:",
         "activity1": "Jun-Aug 2023: Working as a \"Cybersecurity Analyst\" intern at <a href='https://seresco.es' target='_blank'>seresco</a>",
         "activity2": "Jul-Aug 2022: Working as a \"Backend Developer\" intern at <a href='https://ebroker.es' target='_blank'>ebroker</a>",
-        "activity3": "Nov 2025 - Jun 2026: Working as an \"IT Services Intern\" at <a href='https://www.uniovi.es' target='_blank'>University of Oviedo</a>"
+        "activity3": "Nov 2025 - Jun 2026: Working as an \"IT Services Intern\" at <a href='https://www.uniovi.es' target='_blank'>University of Oviedo</a>",
+        "lastUpdated": "<em>Updated: April 26, 2026</em>"
     }
 };
 
