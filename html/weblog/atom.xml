@@ -3,7 +3,7 @@
 
   <title>ruflas</title>
   <link href="https://ruflas.dev/weblog"/>
-  <updated>2024-03-14T00:00:00Z</updated>
+  <updated>2026-05-05T00:00:00Z</updated>
   <author>
     <name>ruflas</name>
     <email>ruflas@ruflas.dev</email>
@@ -11,6 +11,13 @@
     <icon>https://ruflas.dev/img/catIcon.webp</icon>
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <entry>
+    <title>Homelab</title>
+    <link href="https://ruflas.dev/weblog/homelab"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa70</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <summary>Mi homelab montado con Jonsbo N4, Xeon E5 2680 V4 y Proxmox VE para experimentar con virtualización, ciberseguridad y autohospedaje de servicios.</summary>
+  </entry>
   <entry>
     <title>Cyber Apocalypse 2024: Hacker Royale</title>
     <link href="https://ruflas.dev/weblog/cyberapocalypsectf"/>
