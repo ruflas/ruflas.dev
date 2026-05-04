@@ -291,9 +291,65 @@ code {
 }
 
 .post p {
-    text-align: left; 
+    text-align: left;
     margin-left: auto;
     margin-right: auto;
-    max-width: 60%; 
+    max-width: 60%;
+}
+
+.post ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    max-width: 60%;
+    margin: 10px auto;
+}
+
+.post li {
+    margin-bottom: 6px;
+}
+
+.postimg-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+.postimg-row .postimg {
+    flex: 1;
+    min-width: 180px;
+    max-width: 300px;
+}
+
+.postimg-row .postimg img {
+    max-width: 100%;
+    max-height: 220px;
+}
+
+figure.postimg {
+    margin: 0;
+}
+
+figcaption {
+    font-size: 0.8em;
+    color: #aaa;
+    margin-top: 6px;
+    text-align: center;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
