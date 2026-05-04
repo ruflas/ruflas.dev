@@ -280,13 +280,14 @@ code {
 
 .postimg img {
     max-width: 700px;
-    max-height: 300px; 
-    width: auto; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto; 
+    max-height: 300px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .post p {
