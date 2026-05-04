@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homelab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/catIcon.webp" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="ruflas Atom Feed" href="https://ruflas.dev/weblog/atom.xml" />
+    <meta name="description" content="Mi nuevo homelab para experimentación y aprendizaje en ciberseguridad, desarrollo y administración de sistemas." />
+    <meta property="og:title" content="Homelab - ruflas" />
+    <meta property="og:description" content="Mi homelab montado con Jonsbo N4, Xeon E5 2680 V4 y Proxmox VE para experimentar con virtualización, ciberseguridad y autohospedaje de servicios." />
+    <meta property="og:image" content="https://ruflas.dev/img/server1.webp" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://ruflas.dev/weblog/homelab" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script src="homelabTranslate.js"></script>
+    <script>
+      function initTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+          currentTheme = "whitestyles.css";
+          localStorage.setItem("theme", currentTheme);
+        }
+
+        document
+          .getElementById("theme-style")
+          .setAttribute("href", currentTheme);
+
+        themeSwitcher.checked = currentTheme === "darkstyles.css";
+      }
+
+      function toggleTheme() {
+        var themeSwitcher = document.getElementById("checkbox");
+        var theme = themeSwitcher.checked
+          ? "darkstyles.css"
+          : "whitestyles.css";
+        document.getElementById("theme-style").setAttribute("href", theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      window.onload = function () {
+        initTheme();
+        var themeSwitcher = document.getElementById("checkbox");
+        themeSwitcher.addEventListener("change", toggleTheme);
+      }
+    </script>
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      type="text/css"
+      href="whitestyles.css"
+    />
+  </head>
+  <body data-post-id="5">
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a id="navInicio" href="https://ruflas.dev">Inicio</a></li>
+          <li><a id="weblog" href="https://ruflas.dev/weblog/">Weblog</a></li>
+          <li><a id="now" href="https://ruflas.dev/now">Now</a></li>
+          <li>
+            <a href="https://ruflas.dev/weblog/atom.xml">
+              <img src="../img/rss.svg" alt="RSS Feed" class="rss-icon" />
+            </a>
+          </li>
+        </ul>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" aria-label="Cambiar tema claro/oscuro" />
+            <div class="slider round" onclick="toggleTheme()"></div>
+          </label>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <article class="post">
+        <h1 id="postTitle">Homelab</h1>
+        <h2 id="postDate" class="date">
+          <time datetime="2026-05-05">Publicado el 05 de mayo de 2026</time>
+        </h2>
+
+        <p id="introduction">
+          He decidido montar mi propio homelab como un entorno dedicado a la experimentación y el aprendizaje en ciberseguridad, desarrollo y administración de sistemas.
+        </p>
+
+        <h3 id="motivationTitle">Motivación</h3>
+        <p id="motivation">
+          Un homelab es una herramienta fundamental para cualquier persona apasionada por la ciberseguridad y la administración de sistemas. Me permite probar nuevas tecnologías, practicar técnicas de hacking ético, configurar servicios y perfeccionar mis habilidades en un entorno seguro y controlado, eliminando el riesgo de afectar sistemas en producción.
+        </p>
+
+        <h3 id="hardwareTitle">Hardware</h3>
+        <p id="hardwareIntro">
+          El núcleo de mi laboratorio está construido con componentes cuidadosamente seleccionados para ofrecer un rendimiento óptimo:
+        </p>
+
+        <ul id="hardwareList">
+          <li id="hw1"><strong>Chasis:</strong> Jonsbo N4 - un diseño compacto pero con excelente capacidad.</li>
+          <li id="hw2"><strong>Procesador:</strong> Intel Xeon E5 2680 V4 - 14 núcleos y 28 hilos, ideal para cargas intensivas de virtualización.</li>
+          <li id="hw3"><strong>Memoria:</strong> 32GB RAM ECC DDR4 - fundamental para garantizar la estabilidad del sistema y la integridad de los datos.</li>
+          <li id="hw4"><strong>Placa Base:</strong> X99 Machinist - excelente soporte para expansión y múltiples recursos.</li>
+          <li id="hw5"><strong>GPU:</strong> NVIDIA GT 710 - dedicada exclusivamente a la salida de vídeo.</li>
+        </ul>
+
+        <div class="postimg-row">
+          <figure class="postimg" id="server5Img">
+            <a href="../img/server5.webp">
+              <img src="../img/server5.webp" alt="Interior del servidor con ventilador, placa y RAM" loading="lazy" />
+            </a>
+            <figcaption id="cap5">Interior: ventilador, placa X99 y RAM ECC</figcaption>
+          </figure>
+          <figure class="postimg" id="server4Img">
+            <a href="../img/server4.webp">
+              <img src="../img/server4.webp" alt="Vista lateral del chasis Jonsbo N4" loading="lazy" />
+            </a>
+            <figcaption id="cap4">Chasis Jonsbo N4 con bahías de discos</figcaption>
+          </figure>
+          <figure class="postimg" id="server3Img">
+            <a href="../img/server3.webp">
+              <img src="../img/server3.webp" alt="Vista exterior del chasis" loading="lazy" />
+            </a>
+            <figcaption id="cap3">Vista exterior del Jonsbo N4</figcaption>
+          </figure>
+        </div>
+
+        <p id="serverSpecs">
+          Esta configuración me proporciona la potencia necesaria para ejecutar múltiples máquinas virtuales y contenedores de forma simultánea, sin sufrir degradación en el rendimiento. El procesador Xeon E5 resulta una pieza clave para manejar estas exigentes cargas de trabajo.
+        </p>
+
+        <figure class="postimg" id="server2Img">
+          <a href="../img/server2.webp">
+            <img src="../img/server2.webp" alt="Chasis Jonsbo N4 completamente montado sobre el escritorio" loading="lazy" />
+          </a>
+          <figcaption id="cap2">Jonsbo N4 completamente montado</figcaption>
+        </figure>
+
+        <h3 id="virtualizationTitle">Virtualización con Proxmox VE</h3>
+        <p id="virtualizationContent">
+          Como hipervisor utilizo Proxmox VE, una potente plataforma de virtualización de código abierto basada en KVM. Proxmox me facilita:
+        </p>
+
+        <ul id="virtualizationList">
+          <li id="virt1">Crear y administrar máquinas virtuales complejas basadas en Linux.</li>
+          <li id="virt2">Ejecutar contenedores LXC para aplicaciones que requieren menos recursos.</li>
+          <li id="virt3">Programar snapshots y copias de seguridad de forma automática.</li>
+          <li id="virt4">Migrar máquinas virtuales en caliente sin tiempo de inactividad (downtime).</li>
+        </ul>
+
+        <h3 id="servicesTitle">Servicios y Aplicaciones</h3>
+        <p id="servicesIntro">
+          Tengo ahora mismo estos servicios importantes montados de cara al uso y análisis de red/servidor:
+        </p>
+
+        <ul id="servicesList">
+          <li id="service1"><strong>Nginx:</strong> Proxy inverso y balanceador de carga que enruta el tráfico hacia mis aplicaciones.</li>
+          <li id="service2"><strong>AdGuard Home:</strong> Servidor DNS que bloquea rastreadores y anuncios en toda mi red doméstica.</li>
+          <li id="service3"><strong>Dockge:</strong> Panel de control intuitivo para gestionar mis contenedores y stacks de docker-compose.</li>
+          <li id="service4"><strong>Gitea:</strong> Servidor Git autoalojado para llevar el control de versiones de forma privada y paralela a GitHub.</li>
+          <li id="service5"><strong>Uptime Kuma:</strong> Herramienta de monitorización para verificar el estado y la disponibilidad de mis servicios.</li>
+          <li id="service6"><strong>Glances:</strong> Dashboard que muestra las estadísticas y el consumo de recursos del servidor en tiempo real.</li>
+          <li id="service7"><strong>Scrutiny:</strong> Monitorización de los datos SMART de mis discos duros para anticiparme a posibles fallos.</li>
+        </ul>
+
+        <h3 id="storageTitle">Almacenamiento</h3>
+        <p id="storageContent">
+          El almacenamiento es un pilar crítico para que el homelab sea seguro y funcional. Para ello, he configurado:
+        </p>
+
+        <ul id="storageList">
+          <li id="stor1"><strong>RAID ZFS:</strong> 4 discos de 1TB en configuración RAID-Z1, asegurando tolerancia a fallos.</li>
+          <li id="stor2"><strong>Capacidad Total:</strong> 4TB de almacenamiento crudo, optimizado para backups, datos y multimedia con redundancia.</li>
+          <li id="stor3"><strong>Snapshots ZFS:</strong> Protección instantánea contra borrados accidentales, ransomware o corrupción de datos.</li>
+          <li id="stor4"><strong>Automatización:</strong> Tareas programadas para el respaldo de máquinas virtuales e información crítica.</li>
+        </ul>
+
+        <figure class="postimg" id="server6Img_storage">
+          <a href="../img/server6.webp">
+            <img src="../img/server6.webp" alt="Pool ZFS de 4 discos de 1TB para almacenamiento" loading="lazy" />
+          </a>
+          <figcaption id="cap6">Pool ZFS de almacenamiento con 4 discos de 1TB</figcaption>
+        </figure>
+
+        <h3 id="automationTitle">Automatización y Scripts</h3>
+        <p id="automationContent">
+          La automatización resulta clave para minimizar el trabajo manual y evitar tareas repetitivas:
+        </p>
+
+        <ul id="automationList">
+          <li id="auto1">Scripts de Bash personalizados para agilizar la administración diaria.</li>
+          <li id="auto2">Uso intensivo de docker-compose para garantizar despliegues consistentes y reproducibles.</li>
+          <li id="auto3">Copias de seguridad desatendidas para proteger configuraciones y máquinas virtuales.</li>
+          <li id="auto4">Sistemas de alerta que me notifican automáticamente si algún servicio presenta problemas.</li>
+        </ul>
+
+        <h3 id="learningTitle">Experiencia de Aprendizaje</h3>
+        <p id="learningContent">
+          Este homelab va mucho más allá de ser una simple infraestructura; es un laboratorio vivo en el que sigo aprendiendo día a día:
+        </p>
+
+        <ul id="learningList">
+          <li id="learn1">Administración avanzada de sistemas Linux en escenarios realistas.</li>
+          <li id="learn2">Virtualización y orquestación de contenedores empleando Proxmox y Docker.</li>
+          <li id="learn3">Aplicación de medidas de seguridad (hardening) y buenas prácticas en redes.</li>
+          <li id="learn4">Gestión de infraestructura como código mediante automatización y scripting.</li>
+          <li id="learn5">Despliegue de proyectos de desarrollo simulando entornos de producción reales.</li>
+        </ul>
+
+        <figure class="postimg" id="server7Img">
+          <a href="../img/server7.webp">
+            <img src="../img/server7.webp" alt="Vista general del homelab en funcionamiento" loading="lazy" />
+          </a>
+          <figcaption id="cap7">Vista general del homelab</figcaption>
+        </figure>
+
+        <h3 id="objectivesTitle">Objetivos Principales</h3>
+        <p id="objectivesContent">
+          El propósito fundamental de este proyecto es alcanzar una mayor independencia y tener un control absoluto sobre mi propia tecnología:
+        </p>
+
+        <ul id="objectivesList">
+          <li id="obj1"><strong>Independencia digital:</strong> Reducir la dependencia de servicios de terceros y gigantes tecnológicos.</li>
+          <li id="obj2"><strong>Autoalojamiento:</strong> Mantener mis propios servicios, datos y proyectos bajo mi propio techo.</li>
+          <li id="obj3"><strong>Experimentación:</strong> Tener la libertad de "romper" y arreglar sistemas para entender a fondo nuevas tecnologías.</li>
+          <li id="obj4"><strong>Ciberseguridad:</strong> Contar con un entorno legal y seguro para practicar tácticas de seguridad ofensiva y defensiva.</li>
+          <li id="obj5"><strong>Desarrollo de Proyectos:</strong> Disponer de un ecosistema real para programar, testear y publicar aplicaciones.</li>
+          <li id="obj6"><strong>Infraestructura de Calidad:</strong> Sentar unas bases sólidas en cuanto a hardware, redes y arquitectura de software.</li>
+        </ul>
+
+        <h3 id="futureTitle">Próximos Pasos</h3>
+        <p id="futureContent">
+          Tengo planes bastante ambiciosos para seguir ampliando y mejorando este laboratorio:
+        </p>
+
+        <ul id="futureList">
+          <li id="fut1">Ampliar la capacidad de almacenamiento incorporando más discos al pool de ZFS.</li>
+          <li id="fut3">Configurar un entorno aislado específico para el análisis de malware y pruebas de penetración.</li>
+          <li id="fut4">Implementar alta disponibilidad (HA) y redundancia a nivel de red y servicios.</li>
+          <li id="fut5">Documentar todo este proceso compartiendo guías técnicas detalladas en el blog.</li>
+        </ul>
+
+        <h3 id="conclusionTitle">Conclusión</h3>
+        <p id="conclusion">
+          Este homelab representa mi compromiso con la soberanía digital y el aprendizaje continuo. No es simplemente un montón de hardware y cables, sino un entorno dinámico donde puedo investigar, equivocarme y construir sin restricciones. Gracias a tecnologías como Proxmox, Docker y Gitea, ahora tengo el control total de mi infraestructura.
+        </p>
+
+        <p id="conclusion2">
+          Si buscas una forma práctica y real de potenciar tus conocimientos en sistemas, ciberseguridad o desarrollo de software, te recomiendo encarecidamente que montes tu propio homelab. La inversión de tiempo se recupera con beneficios técnicos inmediatos y duraderos.
+        </p>
+
+        <p id="closingNote">
+          ¿Tú también estás construyendo tu propio homelab? ¿Utilizas un stack de herramientas similar? ¡Cuéntame tu experiencia en los comentarios!
+        </p>
+      </article>
+    </main>
+    <section id="commentsSection">
+      <h2 id="commentsSectionTitle">Comentarios</h2>
+
+      <form id="commentForm" onsubmit="postComment(event)">
+          <label for="nameInput" class="sr-only">Nombre</label>
+          <input type="text" id="nameInput" placeholder="Nombre" required />
+
+          <label for="websiteInput" class="sr-only">Sitio web</label>
+          <input type="text" id="websiteInput" placeholder="Sitio web" />
+
+          <label for="commentInput" class="sr-only">Comentario</label>
+          <textarea id="commentInput" placeholder="Comentario" required></textarea>
+
+          <button type="submit" id="submitButtonText">Publicar</button>
+      </form>
+
+      <div id="commentsContainer"></div>
+    </section>
+
+    <footer>
+      <p id="footerText">
+        © 2022-2026 ruflas | licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA</a> 😽
+      </p>
+    </footer>
+    <script src="code.js"></script>
+  </body>
+</html>
